@@ -19,7 +19,7 @@ const PROFILE = {
 	surname: "Smith",
 	title: "Software Engineer",
 	location: "Auckland, New Zealand",
-	bio: `I'm a full-stack software engineer with 4 years' experience delivering high-performance, scalable web and mobile applications. Proven track record in leading complex migrations, integrating AI-powered solutions, and optimising systems for cost, speed, and user experience. Skilled in technical SEO, content strategy, and bridging technical and business needs - from enterprise contract negotiations to hands-on coding.`,
+	bio: `I'm a full-stack engineer with 4 years of experience building fast, scalable web and mobile apps. I've led tricky migrations, shipped AI-powered features, and tuned systems for cost, performance, and UX. I also bring technical SEO and content strategy, and I'm comfortable bridging business and engineering—from contract talks to hands-on coding.`,
 	avatar: "/profile.jpeg",
 };
 
@@ -43,66 +43,46 @@ const EXPERIENCE = [
 		company: "New Zealand National Party",
 		period: "2023 - Present",
 		description:
-			"Leading frontend architecture and building scalable web applications using React and TypeScript.",
+			"Led the build of several web applications, migrating from a legacy tech stack to Next.js on Vercel. Integrated generative AI into web platforms, including an agent that publishes press releases and vector search for the CMS. Built volunteer CRM, email platform, and a React Native campaign app.",
 		highlights: [
-			"Led team of 5 engineers",
-			"Reduced load time by 40%",
-			"Shipped 3 major features",
+			"Reduced costs by 40% via Next.js migration",
+			"AI reduced article time from 15min to 3min",
+			"Saved 200+ volunteer hours with document AI",
+			"Built CRM for 250+ users",
 		],
 	},
 	{
 		title: "Software Engineer",
 		company: "Freelance",
-		period: "2020 - 2022",
+		period: "2021 - 2023",
 		description:
-			"Built and maintained core product features, working across the full stack with Node.js and React.",
+			"Delivered custom web applications for clients in food manufacturing and politics, specialising in Next.js and cloud-based solutions.",
 		highlights: [
-			"Built real-time collaboration features",
-			"Improved test coverage to 85%",
+			"Built Shopify order fulfilment system",
+			"Developed Mapbox leaflet map generator",
 		],
 	},
 	{
-		title: "Software Engineer Intern",
+		title: "Software Intern",
 		company: "Precision Vision Systems",
 		period: "2020, 2021",
 		description:
-			"Developed client websites and web applications, honing skills in JavaScript and modern CSS.",
-		highlights: ["Delivered 20+ client projects", "Mentored 2 interns"],
+			"Rebuilt the backend (Express.js) and frontend (React SPA) for a camera timelapse system. Also developed an Android app for capturing timelapses.",
+		highlights: [
+			"Full-stack timelapse system rebuild",
+			"Android timelapse app development",
+		],
 	},
 ];
 
 const PROJECTS = [
 	{
-		title: "Project Alpha",
+		title: "Leaflet",
 		description:
-			"A full-stack SaaS application for team collaboration with real-time updates and integrations.",
-		tech: ["React", "Node.js", "PostgreSQL", "WebSockets"],
-		url: "https://github.com/yourusername/project-alpha",
+			"A Mapbox leaflet map generator for New Zealand and Australian political parties.",
+		tech: ["Next.js", "React", "PostgreSQL", "MapBox"],
+		url: "https://leaflet.btsmith.nz",
 		featured: true,
-	},
-	{
-		title: "Design System",
-		description:
-			"A comprehensive component library with accessibility-first design and extensive documentation.",
-		tech: ["TypeScript", "Storybook", "Tailwind CSS"],
-		url: "https://github.com/yourusername/design-system",
-		featured: true,
-	},
-	{
-		title: "CLI Tool",
-		description:
-			"A developer productivity tool that automates common workflows and boilerplate generation.",
-		tech: ["Rust", "CLI"],
-		url: "https://github.com/yourusername/cli-tool",
-		featured: false,
-	},
-	{
-		title: "Open Source Contributions",
-		description:
-			"Active contributor to various open source projects including React ecosystem libraries.",
-		tech: ["React", "TypeScript", "Open Source"],
-		url: "https://github.com/yourusername",
-		featured: false,
 	},
 ];
 
