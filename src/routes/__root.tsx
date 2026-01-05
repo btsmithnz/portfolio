@@ -15,7 +15,7 @@ interface MyRouterContext {
 	queryClient: QueryClient;
 }
 
-const isProduction = process.env.VERCEL_ENV === "production";
+const isProduction = import.meta.env.VERCEL_ENV === "production";
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({
