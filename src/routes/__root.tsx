@@ -15,8 +15,6 @@ interface MyRouterContext {
 	queryClient: QueryClient;
 }
 
-const isProduction = import.meta.env.VERCEL_ENV === "production";
-
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({
 		meta: [
@@ -64,7 +62,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 					]}
 				/>
 				<Scripts />
-				<Analytics mode={isProduction ? "production" : "development"} />
+				<Analytics />
 			</body>
 		</html>
 	);
