@@ -8,6 +8,7 @@ import {
 	Linkedin,
 	MapPin,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({ component: Portfolio });
 
@@ -113,6 +114,17 @@ function Portfolio() {
 }
 
 function HeroSection() {
+	const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setShowScrollIndicator(window.scrollY < 50);
+		};
+
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
+
 	return (
 		<section className="relative min-h-[90vh] flex items-center justify-center px-6 py-20 overflow-hidden">
 			{/* Background gradient */}
@@ -169,12 +181,16 @@ function HeroSection() {
 						</a>
 					))}
 				</div>
+			</div>
 
-				{/* Scroll indicator */}
-				<div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-					<div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-2">
-						<div className="w-1.5 h-3 bg-muted-foreground/50 rounded-full" />
-					</div>
+			{/* Scroll indicator - positioned relative to section, fades on scroll */}
+			<div
+				className={`absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce transition-opacity duration-300 ${
+					showScrollIndicator ? "opacity-100" : "opacity-0 pointer-events-none"
+				}`}
+			>
+				<div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-2">
+					<div className="w-1.5 h-3 bg-muted-foreground/50 rounded-full" />
 				</div>
 			</div>
 		</section>
