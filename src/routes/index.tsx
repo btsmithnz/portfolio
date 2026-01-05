@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
+	Archive,
 	Calendar,
 	ExternalLink,
 	Github,
@@ -83,6 +84,14 @@ const PROJECTS = [
 		url: "https://leaflet.btsmith.nz",
 		featured: true,
 	},
+	{
+		title: "COVID Tracker",
+		description: "A COVID-19 tracker for New Zealand using data from the NZ Ministry of Health.",
+		tech: ["Next.js", "React", "Firebase", "MapBox"],
+		url: "https://github.com/btsmithnz",
+		featured: true,
+		historic: true,
+	}
 ];
 
 // ============================================
@@ -263,12 +272,20 @@ function ProjectsSection() {
 							className="group block p-8 bg-background rounded-2xl border border-border hover:border-primary hover:shadow-xl hover:shadow-primary/5 transition-all duration-300"
 						>
 							<div className="flex items-start justify-between mb-4">
-								<h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-									{project.title}
-								</h3>
+								<div className="flex items-center gap-2">
+									<h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+										{project.title}
+									</h3>
+									{project.historic && (
+										<span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium bg-amber-500/15 text-amber-400 border border-amber-500/25 rounded-full">
+											<Archive size={12} />
+											Archived
+										</span>
+									)}
+								</div>
 								<ExternalLink
 									size={18}
-									className="text-muted-foreground group-hover:text-primary transition-colors"
+									className="text-muted-foreground group-hover:text-primary transition-colors shrink-0"
 								/>
 							</div>
 
@@ -301,9 +318,17 @@ function ProjectsSection() {
 							className="group flex items-center justify-between p-5 bg-background/50 rounded-xl border border-border hover:border-primary/50 transition-all duration-300"
 						>
 							<div>
-								<h3 className="font-medium text-foreground group-hover:text-primary transition-colors">
-									{project.title}
-								</h3>
+								<div className="flex items-center gap-2">
+									<h3 className="font-medium text-foreground group-hover:text-primary transition-colors">
+										{project.title}
+									</h3>
+									{project.historic && (
+										<span className="inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-medium bg-amber-500/15 text-amber-400 border border-amber-500/25 rounded-full">
+											<Archive size={10} />
+											Archived
+										</span>
+									)}
+								</div>
 								<p className="text-sm text-muted-foreground">
 									{project.description.slice(0, 60)}...
 								</p>
