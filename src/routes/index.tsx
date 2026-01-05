@@ -10,7 +10,13 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export const Route = createFileRoute("/")({ component: Portfolio });
+export const Route = createFileRoute("/")({
+	component: Portfolio,
+	headers: () => ({
+		"Cache-Control":
+			"public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
+	}),
+});
 
 // ============================================
 // EDIT YOUR DETAILS HERE
@@ -87,12 +93,13 @@ const PROJECTS = [
 	},
 	{
 		title: "COVID Tracker",
-		description: "A COVID-19 tracker for New Zealand using data from the NZ Ministry of Health.",
+		description:
+			"A COVID-19 tracker for New Zealand using data from the NZ Ministry of Health.",
 		tech: ["Next.js", "React", "Firebase", "MapBox"],
 		url: "https://github.com/btsmithnz",
 		featured: true,
 		historic: true,
-	}
+	},
 ];
 
 // ============================================
