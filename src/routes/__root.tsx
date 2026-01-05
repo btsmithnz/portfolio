@@ -6,7 +6,7 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { inject } from "@vercel/analytics";
+import { Analytics } from "@vercel/analytics/react";
 import Header from "../components/Header";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
@@ -16,10 +16,6 @@ interface MyRouterContext {
 }
 
 const isProduction = process.env.VERCEL_ENV === "production";
-
-inject({
-	mode: isProduction ? "production" : "development",
-});
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({
@@ -68,6 +64,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 					]}
 				/>
 				<Scripts />
+				<Analytics mode={isProduction ? "production" : "development"} />
 			</body>
 		</html>
 	);
