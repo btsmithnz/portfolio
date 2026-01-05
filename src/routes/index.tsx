@@ -23,7 +23,7 @@ const PROFILE = {
 };
 
 const SOCIALS = [
-	{ name: "GitHub", url: "https://github.com/Ben4944", icon: Github },
+	{ name: "GitHub", url: "https://github.com/btsmithnz", icon: Github },
 	{
 		name: "LinkedIn",
 		url: "https://linkedin.com/in/btsmithnz",
