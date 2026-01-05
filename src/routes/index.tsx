@@ -5,7 +5,6 @@ import {
 	Github,
 	Instagram,
 	Linkedin,
-	Mail,
 	MapPin,
 } from "lucide-react";
 
@@ -145,17 +144,19 @@ function HeroSection() {
 				</div>
 
 				{/* Social Links */}
-				<div className="flex items-center justify-center gap-4 animate-fade-in animate-delay-500">
+				<div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 animate-fade-in animate-delay-500">
 					{SOCIALS.map((social) => (
 						<a
 							key={social.name}
 							href={social.url}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="group flex items-center gap-2 px-5 py-3 bg-card hover:bg-primary text-foreground hover:text-primary-foreground rounded-full border border-border hover:border-primary transition-all duration-300"
+							className="group flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 bg-card hover:bg-primary text-foreground hover:text-primary-foreground rounded-full border border-border hover:border-primary transition-all duration-300"
 						>
-							<social.icon size={20} />
-							<span className="font-medium">{social.name}</span>
+							<social.icon size={18} className="sm:w-5 sm:h-5" />
+							<span className="font-medium text-sm sm:text-base">
+								{social.name}
+							</span>
 						</a>
 					))}
 				</div>
