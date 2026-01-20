@@ -104,7 +104,7 @@ const PROJECTS = [
 		description:
 			"A COVID-19 tracker for New Zealand using data from the NZ Ministry of Health.",
 		tech: ["Next.js", "React", "Firebase", "MapBox"],
-		url: "https://github.com/btsmithnz",
+		url: "https://github.com/btsmithnz/covid-nz-app",
 		featured: true,
 		historic: true,
 	},
