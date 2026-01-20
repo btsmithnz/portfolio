@@ -92,6 +92,14 @@ const PROJECTS = [
 		featured: true,
 	},
 	{
+		title: "National Party Website",
+		description:
+			"The official website for New Zealand's National Party, featuring news, policy information, and member engagement tools.",
+		tech: ["Next.js", "Vercel", "React"],
+		url: "https://www.national.org.nz",
+		featured: true,
+	},
+	{
 		title: "COVID Tracker",
 		description:
 			"A COVID-19 tracker for New Zealand using data from the NZ Ministry of Health.",
