@@ -84,6 +84,14 @@ const EXPERIENCE = [
 
 const PROJECTS = [
 	{
+		title: "Seoteric",
+		description:
+			"An AI agent for SEO optimisation and recommendations.",
+		tech: ["Next.js", "React", "AI SDK"],
+		url: "https://seoteric.btsmith.nz",
+		featured: true,
+	},
+	{
 		title: "Leaflet",
 		description:
 			"A Mapbox leaflet map generator for New Zealand and Australian political parties.",
