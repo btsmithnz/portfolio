@@ -1,14 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-	Archive,
-	Calendar,
-	ExternalLink,
-	Github,
-	Instagram,
-	Linkedin,
-	MapPin,
-} from "lucide-react";
-import { useEffect, useState } from "react";
+import { Github, Instagram, Linkedin, MapPin } from "lucide-react";
+import { cn } from "../lib/utils";
 
 export const Route = createFileRoute("/")({
 	component: Portfolio,
@@ -31,16 +23,23 @@ const PROFILE = {
 };
 
 const SOCIALS = [
-	{ name: "GitHub", url: "https://github.com/btsmithnz", icon: Github },
+	{
+		name: "GitHub",
+		url: "https://github.com/btsmithnz",
+		icon: Github,
+		hoverClass: "hover:text-white",
+	},
 	{
 		name: "LinkedIn",
 		url: "https://linkedin.com/in/btsmithnz",
 		icon: Linkedin,
+		hoverClass: "hover:text-[#0A66C2]",
 	},
 	{
 		name: "Instagram",
 		url: "https://instagram.com/btsmith.nz",
 		icon: Instagram,
+		hoverClass: "hover:text-[#E1306C]",
 	},
 ];
 
@@ -86,10 +85,10 @@ const PROJECTS = [
 	{
 		title: "Seoteric",
 		description:
-			"An AI agent for SEO optimisation and recommendations.",
+			"An AI agent that audits, ranks, and fixes your site's SEO — tracking Core Web Vitals, backlinks, keyword rankings, and technical issues across multiple sites.",
 		tech: ["Next.js", "React", "AI SDK"],
 		url: "https://seoteric.btsmith.nz",
-		featured: true,
+		historic: false,
 	},
 	{
 		title: "Leaflet",
@@ -97,15 +96,15 @@ const PROJECTS = [
 			"A Mapbox leaflet map generator for New Zealand and Australian political parties.",
 		tech: ["Next.js", "React", "PostgreSQL", "MapBox"],
 		url: "https://leaflet.btsmith.nz",
-		featured: true,
+		historic: false,
 	},
 	{
-		title: "National Party Website",
+		title: "National Party",
 		description:
 			"The official website for the New Zealand National Party, featuring news, policy information, and member engagement tools.",
 		tech: ["Next.js", "Vercel", "React"],
 		url: "https://www.national.org.nz",
-		featured: true,
+		historic: false,
 	},
 	{
 		title: "COVID Tracker",
@@ -113,7 +112,6 @@ const PROJECTS = [
 			"A COVID-19 tracker for New Zealand using data from the NZ Ministry of Health.",
 		tech: ["Next.js", "React", "Firebase", "MapBox"],
 		url: "https://github.com/btsmithnz/covid-nz-app",
-		featured: true,
 		historic: true,
 	},
 ];
@@ -124,7 +122,7 @@ const PROJECTS = [
 
 function Portfolio() {
 	return (
-		<div className="dark min-h-screen bg-background text-foreground">
+		<div className="min-h-screen bg-background text-foreground">
 			<div className="grain relative">
 				<HeroSection />
 				<AboutSection />
@@ -137,129 +135,82 @@ function Portfolio() {
 }
 
 function HeroSection() {
-	const [showScrollIndicator, setShowScrollIndicator] = useState(true);
-
-	useEffect(() => {
-		const handleScroll = () => {
-			setShowScrollIndicator(window.scrollY < 50);
-		};
-
-		window.addEventListener("scroll", handleScroll, { passive: true });
-		return () => window.removeEventListener("scroll", handleScroll);
-	}, []);
-
 	return (
-		<section className="relative min-h-[90vh] flex items-center justify-center px-6 py-20 overflow-hidden">
-			{/* Background gradient */}
-			<div className="absolute inset-0 bg-linear-to-br from-background via-background to-primary/5" />
-
-			{/* Decorative elements with slow pulsing animation */}
+		<section className="relative min-h-[60vh] pt-20 pb-12 md:min-h-[85vh] md:py-20 flex flex-col justify-center px-6 overflow-hidden">
+			{/* Dot grid — pure CSS */}
 			<div
-				className="absolute top-20 right-10 w-72 h-72 bg-primary/15 rounded-full blur-3xl animate-pulse"
-				style={{ animationDuration: "4s" }}
+				className="absolute inset-0 opacity-40"
+				style={{
+					backgroundImage:
+						"radial-gradient(oklch(0.35 0.028 250) 1px, transparent 1px)",
+					backgroundSize: "28px 28px",
+				}}
 			/>
-			<div
-				className="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse"
-				style={{ animationDuration: "6s" }}
-			/>
-			<div
-				className="absolute top-1/2 left-1/3 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse"
-				style={{ animationDuration: "5s" }}
-			/>
-
-			<div className="relative z-10 max-w-4xl mx-auto text-center">
-				{/* Avatar with animated gradient ring */}
-				<div className="mb-8 animate-fade-in">
-					<div className="relative w-36 h-36 mx-auto group">
-						<div
-							className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary via-primary/50 to-accent animate-spin"
-							style={{ animationDuration: "8s" }}
+			<div className="relative z-10 max-w-5xl mx-auto w-full">
+				{/* Terminal prompt */}
+				<p className="font-mono text-sm text-primary/70 mb-6 animate-fade-in">
+					~/btsmith <span className="text-muted-foreground">$</span> whoami
+				</p>
+				{/* Avatar + Name block */}
+				<div className="flex items-start gap-8 mb-8 animate-fade-in animate-delay-100">
+					<div className="shrink-0 w-20 h-20 rounded-2xl overflow-hidden ring-1 ring-border hover:ring-primary/60 transition-all duration-300 mt-2">
+						<img
+							src={PROFILE.avatar}
+							alt={PROFILE.name}
+							className="w-full h-full object-cover"
 						/>
-						<div className="absolute inset-[3px] rounded-full bg-background" />
-						<div className="absolute inset-[6px] rounded-full overflow-hidden">
-							<img
-								src={PROFILE.avatar}
-								alt={PROFILE.name}
-								className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-							/>
+					</div>
+					<div>
+						<h1 className="text-[clamp(3rem,9vw,6.5rem)] font-extrabold leading-none tracking-tighter text-foreground mb-2">
+							{PROFILE.name} {PROFILE.surname}
+							<span className="inline-block w-1 h-[0.8em] bg-primary animate-cursor align-middle ml-1 translate-y-[-0.05em]" />
+						</h1>
+						<div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-muted-foreground">
+							<span className="text-lg font-light">{PROFILE.title}</span>
+							<span className="text-border">—</span>
+							<span className="flex items-center gap-1.5 text-sm font-mono">
+								<MapPin size={13} className="text-primary" />
+								{PROFILE.location}
+							</span>
 						</div>
 					</div>
 				</div>
-
-				{/* Name with gradient surname */}
-				<h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4 animate-fade-in animate-delay-100">
-					<span className="text-foreground">{PROFILE.name}</span>{" "}
-					<span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-						{PROFILE.surname}
-					</span>
-				</h1>
-
-				{/* Title */}
-				<p className="text-xl md:text-2xl text-muted-foreground mb-2 animate-fade-in animate-delay-200 font-light">
-					{PROFILE.title}
-				</p>
-
-				{/* Location pill */}
-				<div className="inline-flex items-center gap-2 text-muted-foreground mb-10 animate-fade-in animate-delay-400 px-4 py-2 rounded-full bg-card/50 backdrop-blur-sm border border-border/50">
-					<MapPin size={16} className="text-primary" />
-					<span className="text-sm">{PROFILE.location}</span>
-				</div>
-
-				{/* Social Links with enhanced hover */}
-				<div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 animate-fade-in animate-delay-500">
+				{/* Social links — text + icon, no card buttons */}
+				<div className="flex flex-wrap items-center gap-5 animate-fade-in animate-delay-300">
 					{SOCIALS.map((social) => (
 						<a
 							key={social.name}
 							href={social.url}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="group flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 bg-card/80 backdrop-blur-sm hover:bg-primary text-foreground hover:text-primary-foreground rounded-full border border-border hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20"
+							className={`flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-200 group ${social.hoverClass}`}
 						>
-							<social.icon
-								size={18}
-								className="sm:w-5 sm:h-5 transition-transform duration-300 group-hover:rotate-12"
-							/>
-							<span className="font-medium text-sm sm:text-base">
+							<social.icon size={16} />
+							<span className="font-mono group-hover:underline underline-offset-4">
 								{social.name}
 							</span>
 						</a>
 					))}
 				</div>
 			</div>
-
-			{/* Scroll indicator */}
-			<div
-				className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-300 ${
-					showScrollIndicator ? "opacity-100" : "opacity-0 pointer-events-none"
-				}`}
-			>
-				<div className="w-6 h-10 rounded-full border-2 border-primary/30 flex items-start justify-center p-2 animate-bounce">
-					<div className="w-1.5 h-3 bg-primary/50 rounded-full" />
-				</div>
-			</div>
-		</section>
+			</section>
 	);
 }
 
 function AboutSection() {
 	return (
-		<section
-			data-section="about"
-			className="py-24 px-6 bg-card/50 relative overflow-hidden"
-		>
-			{/* Decorative gradient blob */}
-			<div className="absolute -right-32 top-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-
-			<div className="max-w-3xl mx-auto relative">
-				<h2 className="text-sm uppercase tracking-[0.3em] text-primary mb-6 font-medium flex items-center gap-3">
-					<span className="w-8 h-px bg-primary" />
-					About
-				</h2>
-				<div className="space-y-6">
-					<p className="text-2xl md:text-3xl font-light leading-relaxed text-foreground/90">
-						{PROFILE.bio}
-					</p>
+		<section data-section="about" className="pt-8 pb-16 px-6 relative">
+			<div className="max-w-3xl mx-auto">
+				<div className="flex items-center gap-4 mb-10">
+					<span className="font-mono text-xs text-primary/60">01</span>
+					<span className="w-8 h-px bg-border" />
+					<span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+						About
+					</span>
 				</div>
+				<p className="font-serif text-2xl md:text-3xl leading-relaxed text-foreground/85 animate-on-scroll">
+					{PROFILE.bio}
+				</p>
 			</div>
 		</section>
 	);
@@ -269,45 +220,40 @@ function ExperienceSection() {
 	return (
 		<section data-section="experience" className="py-24 px-6 relative">
 			<div className="max-w-3xl mx-auto">
-				<h2 className="text-sm uppercase tracking-[0.3em] text-primary mb-12 font-medium flex items-center gap-3">
-					<span className="w-8 h-px bg-primary" />
-					Experience
-				</h2>
+				<div className="flex items-center gap-4 mb-12">
+					<span className="font-mono text-xs text-primary/60">02</span>
+					<span className="w-8 h-px bg-border" />
+					<span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+						Experience
+					</span>
+				</div>
 
 				<div className="space-y-12">
 					{EXPERIENCE.map((job) => (
 						<div
 							key={`${job.company}-${job.period}`}
-							className="group relative pl-8 border-l-2 border-border hover:border-primary/50 transition-all duration-500"
+							className="group relative pl-8 border-l border-border hover:border-primary/50 transition-colors duration-500 animate-on-scroll"
 						>
-							{/* Timeline dot with glow on hover */}
-							<div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-background border-2 border-border group-hover:border-primary group-hover:bg-primary group-hover:shadow-lg group-hover:shadow-primary/30 transition-all duration-300" />
-
-							{/* Subtle card background on hover */}
-							<div className="absolute -inset-4 -left-2 rounded-xl bg-card/0 group-hover:bg-card/50 transition-all duration-500 -z-10" />
-
-							<div className="flex items-start justify-between flex-wrap gap-2 mb-3">
-								<div>
-									<h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
-										{job.title}
-									</h3>
-									<p className="text-primary/80 font-medium">{job.company}</p>
-								</div>
-								<div className="flex items-center gap-2 text-muted-foreground text-sm px-3 py-1 rounded-full bg-card/50 border border-border/50">
-									<Calendar size={14} />
-									<span>{job.period}</span>
-								</div>
+							<div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-background border border-border group-hover:border-primary group-hover:bg-primary/20 transition-all duration-300" />
+							<div className="flex items-baseline justify-between flex-wrap gap-2 mb-2">
+								<h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+									{job.title}
+								</h3>
+								<span className="font-mono text-xs text-muted-foreground">
+									{job.period}
+								</span>
 							</div>
-
-							<p className="text-muted-foreground mb-4 leading-relaxed">
+							<p className="text-sm font-medium text-primary/70 mb-3">
+								{job.company}
+							</p>
+							<p className="font-serif text-base text-muted-foreground mb-4 leading-relaxed">
 								{job.description}
 							</p>
-
 							<div className="flex flex-wrap gap-2">
 								{job.highlights.map((highlight) => (
 									<span
 										key={highlight}
-										className="px-3 py-1.5 text-sm bg-secondary/80 text-secondary-foreground rounded-full border border-border/50 hover:border-primary/30 hover:bg-secondary transition-all duration-200"
+										className="font-mono text-xs border border-border/60 text-muted-foreground px-2.5 py-1 rounded hover:border-primary/40 hover:text-primary/80 transition-all duration-200"
 									>
 										{highlight}
 									</span>
@@ -321,105 +267,64 @@ function ExperienceSection() {
 	);
 }
 
+const bentoSpan = (index: number) =>
+	index === 0 || index === 3 ? "md:col-span-2" : "md:col-span-1";
+
 function ProjectsSection() {
-	const featuredProjects = PROJECTS.filter((p) => p.featured);
-	const otherProjects = PROJECTS.filter((p) => !p.featured);
-
 	return (
-		<section
-			data-section="projects"
-			className="py-24 px-6 bg-card/50 relative overflow-hidden"
-		>
-			{/* Decorative gradient blob */}
-			<div className="absolute -left-32 top-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+		<section data-section="projects" className="py-24 px-6 relative">
+			<div className="max-w-5xl mx-auto">
+				<div className="flex items-center gap-4 mb-12">
+					<span className="font-mono text-xs text-primary/60">03</span>
+					<span className="w-8 h-px bg-border" />
+					<span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+						Projects
+					</span>
+				</div>
 
-			<div className="max-w-5xl mx-auto relative">
-				<h2 className="text-sm uppercase tracking-[0.3em] text-primary mb-12 font-medium flex items-center gap-3">
-					<span className="w-8 h-px bg-primary" />
-					Projects
-				</h2>
-
-				{/* Featured Projects */}
-				<div className="grid md:grid-cols-2 gap-6 mb-12">
-					{featuredProjects.map((project) => (
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+					{PROJECTS.map((project, index) => (
 						<a
 							key={project.title}
 							href={project.url}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="group block p-8 bg-background rounded-2xl border border-border hover:border-primary hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1"
+							className={cn(
+								"group block p-7 bg-card rounded-xl border border-border",
+								"hover:border-primary/50 transition-all duration-300",
+								"animate-on-scroll flex flex-col",
+								bentoSpan(index),
+							)}
 						>
-							<div className="flex items-start justify-between mb-4">
-								<div className="flex items-center gap-2">
-									<h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-										{project.title}
-									</h3>
-									{project.historic && (
-										<span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium bg-amber-500/15 text-amber-400 border border-amber-500/25 rounded-full">
-											<Archive size={12} />
-											Archived
-										</span>
-									)}
-								</div>
-								<ExternalLink
-									size={18}
-									className="text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0"
-								/>
-							</div>
-
-							<p className="text-muted-foreground mb-6 leading-relaxed">
+							{project.historic && (
+								<span className="self-start mb-4 font-mono text-[10px] border border-amber-500/30 text-amber-400/80 px-2 py-0.5 rounded">
+									archived
+								</span>
+							)}
+							<h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-200">
+								{project.title}
+							</h3>
+							<p className="font-serif text-muted-foreground leading-relaxed mb-6 flex-1">
 								{project.description}
 							</p>
-
-							<div className="flex flex-wrap gap-2">
-								{project.tech.map((tech) => (
-									<span
-										key={tech}
-										className="px-2.5 py-1 text-xs font-medium bg-primary/10 text-primary rounded-md border border-primary/20"
-									>
-										{tech}
-									</span>
-								))}
+							<div className="flex items-end justify-between gap-4">
+								<div className="flex flex-wrap gap-1.5">
+									{project.tech.map((tech) => (
+										<span
+											key={tech}
+											className="font-mono text-[11px] text-muted-foreground/70 border border-border/50 px-2 py-0.5 rounded"
+										>
+											{tech}
+										</span>
+									))}
+								</div>
+								<span className="font-mono text-xs text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0">
+									view →
+								</span>
 							</div>
 						</a>
 					))}
 				</div>
-
-				{/* Other Projects */}
-				{otherProjects.length > 0 && (
-					<div className="grid md:grid-cols-2 gap-4">
-						{otherProjects.map((project) => (
-							<a
-								key={project.title}
-								href={project.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="group flex items-center justify-between p-5 bg-background/50 rounded-xl border border-border hover:border-primary/50 hover:bg-background transition-all duration-300"
-							>
-								<div>
-									<div className="flex items-center gap-2">
-										<h3 className="font-medium text-foreground group-hover:text-primary transition-colors">
-											{project.title}
-										</h3>
-										{project.historic && (
-											<span className="inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-medium bg-amber-500/15 text-amber-400 border border-amber-500/25 rounded-full">
-												<Archive size={10} />
-												Archived
-											</span>
-										)}
-									</div>
-									<p className="text-sm text-muted-foreground">
-										{project.description.slice(0, 60)}...
-									</p>
-								</div>
-								<ExternalLink
-									size={16}
-									className="text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all shrink-0 ml-4"
-								/>
-							</a>
-						))}
-					</div>
-				)}
 			</div>
 		</section>
 	);
@@ -427,32 +332,28 @@ function ProjectsSection() {
 
 function FooterSection() {
 	return (
-		<footer className="py-16 px-6 border-t border-border relative">
-			<div className="max-w-3xl mx-auto text-center">
-				{/* Social links with enhanced hover */}
-				<div className="flex items-center justify-center gap-4 mb-8">
+		<footer className="py-20 px-6 border-t border-border/50">
+			<div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+				<p className="font-mono text-sm text-muted-foreground/40">
+					{PROFILE.name} {PROFILE.surname}
+					<span className="text-primary animate-cursor">_</span>
+				</p>
+				<div className="flex items-center gap-5">
 					{SOCIALS.map((social) => (
 						<a
 							key={social.name}
 							href={social.url}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="p-3 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-full transition-all duration-300 hover:scale-110"
+							className={`text-muted-foreground/50 transition-colors duration-200 ${social.hoverClass}`}
 							aria-label={social.name}
 						>
-							<social.icon size={22} />
+							<social.icon size={18} />
 						</a>
 					))}
 				</div>
-
-				<p className="text-muted-foreground text-sm">
-					© {new Date().getFullYear()} {PROFILE.name} {PROFILE.surname}
-				</p>
-
-				<p className="text-muted-foreground/40 text-xs mt-4 flex items-center justify-center gap-2">
-					<span className="w-4 h-px bg-muted-foreground/20" />
-					Built with TanStack Start & Tailwind CSS
-					<span className="w-4 h-px bg-muted-foreground/20" />
+				<p className="font-mono text-xs text-muted-foreground/30">
+					TanStack + Tailwind
 				</p>
 			</div>
 		</footer>
