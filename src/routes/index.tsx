@@ -25,7 +25,7 @@ const PROFILE = {
 	name: "Ben",
 	surname: "Smith",
 	title: "Software Engineer",
-	location: "Auckland, New Zealand",
+	location: "Sydney, Australia",
 	bio: `I'm a full-stack engineer with 4 years of experience building fast, scalable web and mobile apps. I've led tricky migrations, shipped AI-powered features, and tuned systems for cost, performance, and UX. I also bring technical SEO and content strategy, and I'm comfortable bridging business and engineering—from contract talks to hands-on coding.`,
 	avatar: "/profile.jpeg",
 };
