@@ -336,7 +336,6 @@ function FooterSection() {
 			<div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
 				<p className="font-mono text-sm text-muted-foreground/40">
 					{PROFILE.name} {PROFILE.surname}
-					<span className="text-primary animate-cursor">_</span>
 				</p>
 				<div className="flex items-center gap-5">
 					{SOCIALS.map((social) => (
