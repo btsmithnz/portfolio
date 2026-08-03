@@ -91,11 +91,11 @@ const PROJECTS = [
 		historic: false,
 	},
 	{
-		title: "Leaflet",
+		title: "Prenso",
 		description:
-			"A Mapbox leaflet map generator for New Zealand and Australian political parties.",
+			"A smart distribution platform that plans optimised delivery routes, guides volunteers, and tracks campaign progress.",
 		tech: ["Next.js", "React", "PostgreSQL", "MapBox"],
-		url: "https://leaflet.btsmith.nz",
+		url: "https://prenso.app",
 		historic: false,
 	},
 	{
