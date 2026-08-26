@@ -46,8 +46,16 @@ const SOCIALS = [
 const EXPERIENCE = [
 	{
 		title: "Software Engineer",
+		company: "Paradino",
+		period: "2026 - Present",
+		description:
+			"Building AI-powered software for financial advisers, automating meeting capture, advice documentation, and compliance workflows so practices can spend less time on admin and more time with clients.",
+		highlights: [],
+	},
+	{
+		title: "Software Engineer",
 		company: "New Zealand National Party",
-		period: "2023 - Present",
+		period: "2023 - 2026",
 		description:
 			"Led the build of several web applications, migrating from a legacy tech stack to Next.js on Vercel. Integrated generative AI into web platforms, including an agent that publishes press releases and vector search for the CMS. Built volunteer CRM, email platform, and a React Native campaign app.",
 		highlights: [
