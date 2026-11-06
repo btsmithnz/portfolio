@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Github, Instagram, Linkedin, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { Github, Instagram, Linkedin } from "../components/BrandIcons";
 import { cn } from "../lib/utils";
 
 export const Route = createFileRoute("/")({
