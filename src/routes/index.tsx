@@ -209,7 +209,7 @@ function HeroSection() {
 					))}
 				</div>
 			</div>
-			</section>
+		</section>
 	);
 }
 
