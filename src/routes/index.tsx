@@ -91,6 +91,14 @@ const EXPERIENCE = [
 
 const PROJECTS = [
 	{
+		title: "SixtyOne",
+		description:
+			"Live results for the 2026 New Zealand general election — tracking the race to a 61-seat majority, mapping every electorate, and charting how the night unfolds.",
+		tech: ["Next.js", "React", "PostgreSQL", "Vercel"],
+		url: "https://www.sixtyone.nz",
+		historic: false,
+	},
+	{
 		title: "Seoteric",
 		description:
 			"An AI agent that audits, ranks, and fixes your site's SEO — tracking Core Web Vitals, backlinks, keyword rankings, and technical issues across multiple sites.",
@@ -201,7 +209,7 @@ function HeroSection() {
 					))}
 				</div>
 			</div>
-			</section>
+		</section>
 	);
 }
 
