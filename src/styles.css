@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @import 'tailwindcss';
 
@@ -37,10 +37,10 @@ body {
   outline-offset: 3px;
 }
 
-/* Hero entrance: photo settles, then the hand waves */
+/* Hero entrance: photo slides up, then the hand waves */
 @keyframes photo-in {
-  from { opacity: 0; rotate: -6deg; scale: 0.94; translate: 0 1.5rem; }
-  to   { opacity: 1; rotate: var(--tilt, 0deg); scale: 1; translate: 0 0; }
+  from { opacity: 0; translate: 0 1rem; }
+  to   { opacity: 1; translate: 0 0; }
 }
 
 @keyframes wave {
@@ -51,10 +51,6 @@ body {
   50% { rotate: 10deg; }
 }
 
-.tilt {
-  rotate: var(--tilt, 0deg);
-}
-
 .wave {
   display: inline-block;
   transform-origin: 70% 75%;
@@ -62,7 +58,7 @@ body {
 
 @media (prefers-reduced-motion: no-preference) {
   .animate-photo-in {
-    animation: photo-in 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation: photo-in 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
   }
 
   .wave {
@@ -74,11 +70,11 @@ body {
   --paper: #f6f8f3;
   --ink: #172119;
   --fern: #24513a;
-  --sun: #ffd43b;
-  --blush: #ffb8a8;
-  --sky: #bcdff4;
-  --mint: #cfecd4;
-  --fog: #e4e8e1;
+  --sun: #ffd23f;
+  --blush: #ff9f8c;
+  --sky: #8fcdf5;
+  --mint: #94dfa8;
+  --fog: #dfe4dc;
 
   --background: var(--paper);
   --foreground: var(--ink);
@@ -103,6 +99,7 @@ body {
 }
 
 @theme inline {
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
   --color-paper: var(--paper);
   --color-ink: var(--ink);
   --color-fern: var(--fern);

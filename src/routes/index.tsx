@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
-import type { CSSProperties } from "react";
 import { Github, Instagram, Linkedin } from "../components/BrandIcons";
 import { cn } from "../lib/utils";
 
@@ -18,14 +17,14 @@ export const Route = createFileRoute("/")({
 const PROFILE = {
 	name: "Ben",
 	surname: "Smith",
-	intro:
-		"Software engineer in Sydney. Building AI products by day, side projects by night.",
+	intro: "Software engineer in Sydney.",
 	// The first paragraph is shown larger, as the lead-in
 	bio: [
 		"I'm a Kiwi in Sydney who loves taking a good idea and turning it into something people actually use.",
 		"Right now that's at Paradino, building AI that takes care of meeting notes and compliance paperwork so financial advisers can spend more time with their clients. Before that, I spent three years at the New Zealand National Party, rebuilding their websites and the tools their team and volunteers relied on to run a campaign.",
-		"I care as much about the product as the code: how it feels to use, how fast it is, and whether anyone actually shows up. Outside work I'm usually halfway through a side project, lately with Claude doing a lot of the typing. Some fizzle out. Some end up live on election night 📈",
+		"I care as much about the product as the code: how it feels to use, how fast it is, and whether anyone actually shows up. These days Claude writes pretty much all of my code, which frees me up to focus on the product and ship a lot more side projects. Away from the screen, I'm usually out for a run or a swim, at the gym, or catching up with friends.",
 	],
+	stack: ["TypeScript", "React", "Next.js", "Postgres", "Claude Code"],
 	avatar: "/profile.jpeg",
 };
 
@@ -107,6 +106,14 @@ const PROJECTS: {
 	period?: string;
 }[] = [
 	{
+		title: "Prenso",
+		description:
+			"A smart distribution platform that plans optimised delivery routes, guides volunteers, and tracks campaign progress.",
+		url: "https://prenso.app",
+		tone: "mint",
+		period: "2026 –",
+	},
+	{
 		title: "SixtyOne",
 		description:
 			"Live results for the 2026 New Zealand general election — tracking the race to a 61-seat majority, mapping every electorate, and charting how the night unfolds.",
@@ -118,15 +125,9 @@ const PROJECTS: {
 		title: "Seoteric",
 		description:
 			"An AI agent that audits, ranks, and fixes your site's SEO — tracking Core Web Vitals, backlinks, keyword rankings, and technical issues across multiple sites.",
-		url: "https://seoteric.btsmith.nz",
+		url: "https://seoteric.app",
 		tone: "sky",
-	},
-	{
-		title: "Prenso",
-		description:
-			"A smart distribution platform that plans optimised delivery routes, guides volunteers, and tracks campaign progress.",
-		url: "https://prenso.app",
-		tone: "mint",
+		period: "2026 –",
 	},
 	{
 		title: "National Party",
@@ -162,10 +163,7 @@ function Portfolio() {
 	);
 }
 
-const tilt = (degrees: number) =>
-	({ "--tilt": `${degrees}deg` }) as CSSProperties;
-
-function SocialButtons({ cta, dark = false }: { cta: string; dark?: boolean }) {
+function SocialButtons({ cta }: { cta: string }) {
 	const [primary, ...rest] = SOCIALS;
 	return (
 		<div className="flex flex-wrap items-center gap-3">
@@ -173,10 +171,7 @@ function SocialButtons({ cta, dark = false }: { cta: string; dark?: boolean }) {
 				href={primary.url}
 				target="_blank"
 				rel="noopener noreferrer"
-				className={cn(
-					"inline-flex items-center gap-2.5 rounded-full px-6 py-3.5 font-semibold transition-transform duration-200 hover:-translate-y-0.5",
-					dark ? "bg-sun text-ink" : "bg-fern text-paper",
-				)}
+				className="inline-flex items-center gap-2.5 rounded-xl bg-ink px-6 py-3.5 font-semibold text-paper transition-transform duration-200 hover:-translate-y-0.5"
 			>
 				<primary.icon size={18} />
 				{cta}
@@ -187,12 +182,7 @@ function SocialButtons({ cta, dark = false }: { cta: string; dark?: boolean }) {
 					href={social.url}
 					target="_blank"
 					rel="noopener noreferrer"
-					className={cn(
-						"inline-flex items-center gap-2 rounded-full border px-4 py-3.5 font-medium transition-colors duration-200 sm:px-5",
-						dark
-							? "border-paper/25 text-paper hover:bg-paper/10"
-							: "border-ink/15 bg-white text-ink hover:border-ink/40",
-					)}
+					className="inline-flex items-center gap-2 rounded-xl border border-ink/15 bg-white px-4 py-3.5 font-medium text-ink transition-colors duration-200 hover:border-ink/50 sm:px-5"
 				>
 					<social.icon size={17} />
 					<span className="sr-only sm:not-sr-only">{social.name}</span>
@@ -204,10 +194,18 @@ function SocialButtons({ cta, dark = false }: { cta: string; dark?: boolean }) {
 
 function HeroSection() {
 	return (
-		<section id="top" className="px-5 pt-28 pb-16 md:pt-40 md:pb-28">
-			<div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-[1.4fr_1fr] md:gap-12">
-				<div className="order-2 md:order-1">
-					<h1 className="font-display text-[clamp(3.25rem,7.4vw,6.25rem)] leading-[0.92] text-ink">
+		<section id="top" className="px-5 pt-28 pb-16 md:pt-44 md:pb-28">
+			<div className="mx-auto max-w-6xl">
+				{/* Photo is sized in em so it always matches the two-line headline */}
+				<div className="flex flex-col items-start gap-6 text-[clamp(3.25rem,7.4vw,6.25rem)] sm:flex-row sm:items-end sm:gap-[0.3em]">
+					<img
+						src={PROFILE.avatar}
+						alt={`${PROFILE.name} ${PROFILE.surname}`}
+						width={640}
+						height={640}
+						className="animate-photo-in aspect-square h-[1.84em] w-auto rounded-2xl object-cover ring-1 ring-ink/10"
+					/>
+					<h1 className="font-display leading-[0.92] text-ink">
 						Hey{" "}
 						<span className="wave" aria-hidden="true">
 							👋
@@ -215,40 +213,32 @@ function HeroSection() {
 						<br />
 						I'm {PROFILE.name}.
 					</h1>
-					<p className="mt-7 max-w-md text-lg leading-relaxed text-muted-foreground md:text-xl">
-						{PROFILE.intro}
-					</p>
-					<div className="mt-9">
-						<SocialButtons cta="Say hi on LinkedIn" />
-					</div>
 				</div>
-
-				<div className="relative order-1 w-full max-w-[9.5rem] md:order-2 md:mx-auto md:max-w-[17rem]">
-					<div
-						aria-hidden="true"
-						className="absolute -top-5 -right-6 size-20 rounded-full bg-sun md:-top-9 md:-right-10 md:size-36"
-					/>
-					<div
-						className="tilt animate-photo-in relative rounded-[1.75rem] bg-white p-2 shadow-[0_30px_50px_-25px_rgb(36_81_58/0.45)] md:rounded-[2rem] md:p-2.5"
-						style={tilt(3)}
-					>
-						<img
-							src={PROFILE.avatar}
-							alt={`${PROFILE.name} ${PROFILE.surname}`}
-							width={640}
-							height={640}
-							className="aspect-[4/5] w-full rounded-[1.375rem] object-cover md:rounded-[1.5rem]"
-						/>
-					</div>
+				<p className="mt-8 max-w-lg text-lg leading-relaxed text-muted-foreground md:text-xl">
+					{PROFILE.intro}
+				</p>
+				<div className="mt-9">
+					<SocialButtons cta="Say hi on LinkedIn" />
 				</div>
 			</div>
 		</section>
 	);
 }
 
-function SectionHeading({ children }: { children: React.ReactNode }) {
+function SectionHeading({
+	children,
+	className,
+}: {
+	children: React.ReactNode;
+	className?: string;
+}) {
 	return (
-		<h2 className="font-display text-3xl leading-tight text-ink md:sticky md:top-28 md:self-start md:text-4xl">
+		<h2
+			className={cn(
+				"font-display text-3xl leading-tight text-ink md:sticky md:top-28 md:self-start md:text-4xl",
+				className,
+			)}
+		>
 			{children}
 		</h2>
 	);
@@ -272,6 +262,14 @@ function AboutSection() {
 							{paragraph}
 						</p>
 					))}
+					<div className="mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-2 border-t border-border pt-6 font-mono text-sm">
+						<span className="text-muted-foreground">Usual stack</span>
+						{PROFILE.stack.map((tool) => (
+							<span key={tool} className="text-ink">
+								{tool}
+							</span>
+						))}
+					</div>
 				</div>
 			</div>
 		</section>
@@ -280,10 +278,15 @@ function AboutSection() {
 
 function ExperienceSection() {
 	return (
-		<section id="work" className="px-5 py-14 md:py-24">
+		<section
+			id="work"
+			className="bg-ink bg-[radial-gradient(rgb(246_248_243/0.07)_1px,transparent_1px)] bg-[size:24px_24px] px-5 py-20 text-paper md:py-28"
+		>
 			<div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1fr_2fr] md:gap-12">
-				<SectionHeading>Where I've worked</SectionHeading>
-				<ul className="max-w-2xl divide-y divide-border">
+				<SectionHeading className="text-paper">
+					Where I've worked
+				</SectionHeading>
+				<ul className="max-w-2xl divide-y divide-paper/10">
 					{EXPERIENCE.map((job) => (
 						<li
 							key={`${job.company}-${job.period}`}
@@ -292,7 +295,7 @@ function ExperienceSection() {
 							<div
 								aria-hidden="true"
 								className={cn(
-									"font-display grid size-12 shrink-0 place-items-center rounded-2xl text-xl text-ink",
+									"font-display grid size-12 shrink-0 place-items-center rounded-xl text-xl text-ink",
 									TONES[job.tone],
 								)}
 							>
@@ -300,13 +303,13 @@ function ExperienceSection() {
 							</div>
 							<div className="min-w-0 flex-1">
 								<div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-									<h3 className="text-xl font-bold text-ink">{job.company}</h3>
-									<span className="text-sm text-muted-foreground">
+									<h3 className="text-xl font-bold">{job.company}</h3>
+									<span className="font-mono text-sm text-paper/50">
 										{job.period}
 									</span>
 								</div>
-								<p className="mt-0.5 font-medium text-fern">{job.title}</p>
-								<p className="mt-3 leading-relaxed text-muted-foreground">
+								<p className="mt-0.5 font-medium text-sun">{job.title}</p>
+								<p className="mt-3 leading-relaxed text-paper/65">
 									{job.description}
 								</p>
 							</div>
@@ -328,12 +331,12 @@ const linkLabel = (url: string) => {
 
 function ProjectsSection() {
 	return (
-		<section id="projects" className="px-5 py-14 md:py-24">
+		<section id="projects" className="px-5 py-20 md:py-28">
 			<div className="mx-auto max-w-6xl">
 				<h2 className="font-display mb-10 text-3xl leading-tight text-ink md:mb-14 md:text-4xl">
 					Things I've built
 				</h2>
-				<div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+				<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 					{PROJECTS.map((project, index) => {
 						const featured = index === 0;
 						return (
@@ -343,7 +346,7 @@ function ProjectsSection() {
 								target="_blank"
 								rel="noopener noreferrer"
 								className={cn(
-									"group flex flex-col rounded-[2rem] p-7 text-ink transition-transform duration-300 hover:-translate-y-1 md:p-9",
+									"group flex flex-col rounded-2xl p-7 text-ink transition-transform duration-300 hover:-translate-y-1 md:p-9",
 									TONES[project.tone],
 									featured && "md:col-span-2 md:min-h-80 md:p-12",
 								)}
@@ -361,12 +364,12 @@ function ProjectsSection() {
 											{project.title}
 										</h3>
 										{project.period && (
-											<p className="mt-3 font-medium text-ink/60">
+											<p className="mt-3 font-mono text-sm text-ink/60">
 												{project.period}
 											</p>
 										)}
 									</div>
-									<span className="grid size-12 shrink-0 place-items-center rounded-full bg-ink text-paper transition-transform duration-300 group-hover:rotate-45">
+									<span className="grid size-11 shrink-0 place-items-center rounded-xl bg-ink text-paper transition-transform duration-300 group-hover:rotate-45">
 										<ArrowUpRight size={22} aria-hidden="true" />
 									</span>
 								</div>
@@ -378,7 +381,7 @@ function ProjectsSection() {
 								>
 									{project.description}
 								</p>
-								<p className="mt-8 font-semibold underline decoration-ink/30 underline-offset-4 transition-colors group-hover:decoration-ink">
+								<p className="mt-8 font-mono text-sm font-medium underline decoration-ink/30 underline-offset-4 transition-colors group-hover:decoration-ink">
 									{linkLabel(project.url)}
 								</p>
 							</a>
@@ -392,30 +395,25 @@ function ProjectsSection() {
 
 function FooterSection() {
 	return (
-		<footer className="px-5 pt-12 pb-8">
-			<div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] bg-fern px-7 py-14 text-paper md:px-16 md:py-20">
-				<div
-					aria-hidden="true"
-					className="absolute -right-16 -bottom-24 size-64 rounded-full bg-sun md:size-96"
-				/>
-				<div className="relative max-w-xl">
+		<footer className="px-5 pt-4 pb-8">
+			<div className="mx-auto max-w-6xl rounded-2xl bg-sun px-7 py-14 text-ink md:px-16 md:py-20">
+				<div className="max-w-xl">
 					<h2 className="font-display text-[clamp(2.75rem,7vw,5.5rem)] leading-[0.95]">
 						Let's chat
 					</h2>
-					<p className="mt-5 text-lg leading-relaxed text-paper/80 md:text-xl">
+					<p className="mt-5 text-lg leading-relaxed text-ink/75 md:text-xl">
 						Working on something interesting, hiring, or just want to swap notes
 						on AI, side projects or NZ politics? My DMs are open.
 					</p>
 					<div className="mt-9">
-						<SocialButtons cta="Message me on LinkedIn" dark />
+						<SocialButtons cta="Message me on LinkedIn" />
 					</div>
 				</div>
 			</div>
-			<div className="mx-auto mt-6 flex max-w-6xl flex-wrap justify-between gap-2 px-2 text-sm text-muted-foreground">
+			<div className="mx-auto mt-6 flex max-w-6xl flex-wrap justify-between gap-2 px-2 font-mono text-sm text-muted-foreground">
 				<p>
 					© {new Date().getFullYear()} {PROFILE.name} {PROFILE.surname}
 				</p>
-				<p>Made with ☕ in Sydney</p>
 			</div>
 		</footer>
 	);
