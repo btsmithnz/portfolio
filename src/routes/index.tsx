@@ -163,7 +163,14 @@ function Portfolio() {
 	);
 }
 
-function SocialButtons({ cta }: { cta: string }) {
+// onColor keeps the buttons dark-on-light when they sit on a coloured block
+function SocialButtons({
+	cta,
+	onColor = false,
+}: {
+	cta: string;
+	onColor?: boolean;
+}) {
 	const [primary, ...rest] = SOCIALS;
 	return (
 		<div className="flex flex-wrap items-center gap-3">
@@ -171,7 +178,10 @@ function SocialButtons({ cta }: { cta: string }) {
 				href={primary.url}
 				target="_blank"
 				rel="noopener noreferrer"
-				className="inline-flex items-center gap-2.5 rounded-xl bg-ink px-6 py-3.5 font-semibold text-paper transition-transform duration-200 hover:-translate-y-0.5"
+				className={cn(
+					"inline-flex items-center gap-2.5 rounded-xl px-6 py-3.5 font-semibold transition-transform duration-200 hover:-translate-y-0.5",
+					onColor ? "bg-ink text-paper" : "bg-foreground text-background",
+				)}
 			>
 				<primary.icon size={18} />
 				{cta}
@@ -182,7 +192,12 @@ function SocialButtons({ cta }: { cta: string }) {
 					href={social.url}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="inline-flex items-center gap-2 rounded-xl border border-ink/15 bg-white px-4 py-3.5 font-medium text-ink transition-colors duration-200 hover:border-ink/50 sm:px-5"
+					className={cn(
+						"inline-flex items-center gap-2 rounded-xl border px-4 py-3.5 font-medium transition-colors duration-200 sm:px-5",
+						onColor
+							? "border-ink/15 bg-white text-ink hover:border-ink/50"
+							: "border-foreground/15 bg-card text-foreground hover:border-foreground/50",
+					)}
 				>
 					<social.icon size={17} />
 					<span className="sr-only sm:not-sr-only">{social.name}</span>
@@ -203,9 +218,9 @@ function HeroSection() {
 						alt={`${PROFILE.name} ${PROFILE.surname}`}
 						width={640}
 						height={640}
-						className="animate-photo-in aspect-square h-[1.84em] w-auto rounded-2xl object-cover ring-1 ring-ink/10"
+						className="animate-photo-in aspect-square h-[1.84em] w-auto rounded-2xl object-cover ring-1 ring-foreground/10"
 					/>
-					<h1 className="font-display leading-[0.92] text-ink">
+					<h1 className="font-display leading-[0.92] text-foreground">
 						Hey{" "}
 						<span className="wave" aria-hidden="true">
 							👋
@@ -235,7 +250,7 @@ function SectionHeading({
 	return (
 		<h2
 			className={cn(
-				"font-display text-3xl leading-tight text-ink md:sticky md:top-28 md:self-start md:text-4xl",
+				"font-display text-3xl leading-tight text-foreground md:sticky md:top-28 md:self-start md:text-4xl",
 				className,
 			)}
 		>
@@ -251,7 +266,7 @@ function AboutSection() {
 			<div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_2fr] md:gap-12">
 				<SectionHeading>A bit about me</SectionHeading>
 				<div className="max-w-2xl space-y-6">
-					<p className="text-2xl font-medium leading-snug text-ink md:text-[2rem] md:leading-[1.25]">
+					<p className="text-2xl font-medium leading-snug text-foreground md:text-[2rem] md:leading-[1.25]">
 						{lede}
 					</p>
 					{rest.map((paragraph) => (
@@ -265,7 +280,7 @@ function AboutSection() {
 					<div className="mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-2 border-t border-border pt-6 font-mono text-sm">
 						<span className="text-muted-foreground">Usual stack</span>
 						{PROFILE.stack.map((tool) => (
-							<span key={tool} className="text-ink">
+							<span key={tool} className="text-foreground">
 								{tool}
 							</span>
 						))}
@@ -280,7 +295,7 @@ function ExperienceSection() {
 	return (
 		<section
 			id="work"
-			className="bg-ink bg-[radial-gradient(rgb(246_248_243/0.07)_1px,transparent_1px)] bg-[size:24px_24px] px-5 py-20 text-paper md:py-28"
+			className="bg-ink bg-[radial-gradient(rgb(246_248_243/0.07)_1px,transparent_1px)] bg-[size:24px_24px] px-5 py-20 text-paper md:py-28 dark:border-y dark:border-paper/10"
 		>
 			<div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1fr_2fr] md:gap-12">
 				<SectionHeading className="text-paper">
@@ -333,7 +348,7 @@ function ProjectsSection() {
 	return (
 		<section id="projects" className="px-5 py-20 md:py-28">
 			<div className="mx-auto max-w-6xl">
-				<h2 className="font-display mb-10 text-3xl leading-tight text-ink md:mb-14 md:text-4xl">
+				<h2 className="font-display mb-10 text-3xl leading-tight text-foreground md:mb-14 md:text-4xl">
 					Things I've built
 				</h2>
 				<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -406,7 +421,7 @@ function FooterSection() {
 						on AI, side projects or NZ politics? My DMs are open.
 					</p>
 					<div className="mt-9">
-						<SocialButtons cta="Message me on LinkedIn" />
+						<SocialButtons cta="Message me on LinkedIn" onColor />
 					</div>
 				</div>
 			</div>

@@ -4,9 +4,10 @@
 
 @import 'tw-animate-css';
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (@media (prefers-color-scheme: dark));
 
 html {
+  color-scheme: light dark;
   scroll-padding-top: 5rem;
 }
 
@@ -33,7 +34,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--fern);
+  outline: 2px solid var(--ring);
   outline-offset: 3px;
 }
 
@@ -96,6 +97,26 @@ body {
   --input: #dbe1d7;
   --ring: var(--fern);
   --radius: 0.625rem;
+}
+
+/* Dark mode follows the visitor's system setting. Ink and paper stay fixed
+   because they're used on the coloured blocks, which look the same in both. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0d120f;
+    --foreground: #eef2ec;
+    --card: #18201a;
+    --card-foreground: #eef2ec;
+    --popover: #18201a;
+    --popover-foreground: #eef2ec;
+    --secondary: #1f2921;
+    --secondary-foreground: #eef2ec;
+    --muted: #1f2921;
+    --muted-foreground: #9aa89d;
+    --border: #273229;
+    --input: #273229;
+    --ring: var(--mint);
+  }
 }
 
 @theme inline {

@@ -23,12 +23,12 @@ export default function Header() {
 			className={cn(
 				"fixed top-0 right-0 left-0 z-50 border-b transition-colors duration-300",
 				scrolled
-					? "border-border bg-paper/85 backdrop-blur-md"
+					? "border-border bg-background/85 backdrop-blur-md"
 					: "border-transparent bg-transparent",
 			)}
 		>
 			<div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
-				<a href="#top" className="font-display text-lg text-ink">
+				<a href="#top" className="font-display text-lg text-foreground">
 					Ben Smith
 				</a>
 				<nav className="flex items-center gap-0.5 text-sm font-medium sm:gap-1">
@@ -36,7 +36,7 @@ export default function Header() {
 						<a
 							key={link.href}
 							href={link.href}
-							className="rounded-full px-3 py-2 text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink sm:px-4"
+							className="rounded-full px-3 py-2 text-foreground/70 transition-colors hover:bg-foreground/5 hover:text-foreground sm:px-4"
 						>
 							{link.label}
 						</a>
